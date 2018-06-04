@@ -8,26 +8,57 @@ class Calendar {
 
     init() {
 
-        alert(`${this.date} ${this.days} ${this.locale}`);
-
         const calendarTemplate = document.getElementById('calendar').content;
         const calendarClone = document.importNode(calendarTemplate, true);
 
         const calendarBody = calendarClone.querySelector('tbody');
+        let count = this.days,
+            date = this.date;
+        
 
-        let tr = document.createElement('tr');
+        for(let i = 0; i < Math.ceil(days/7); i++) {
 
-        for(let i = 0; i < 7; i++) {
+            let tr = document.createElement('tr');
+
+            for(let j = 0; j < 7; j++) {
+
+                let td = document.createElement('td');
+
+                if(count === this.days && date.day() === j) {
+
+                    if(date.day() === 0 || date.day() === 6)
+                    {
+                        td.classList.add('yellow');
+                    }
+                    else {
+                        td.classList.add('green');
+                    }   
+                }
+                if(count > 0) {
+                    if(date.day() === 0 || date.day() === 6)
+                    {
+                        td.classList.add('yellow');
+                    }
+                    else {
+                        td.classList.add('green');
+                    }
+                }
+                else {
+                    td.classList.add('grey');
+                }
+
+                tr.appendChild(td);
+
+                count--;
+                date = date.add(1, 'day');
+            }
             
-            let td = document.createElement('td');
-            td.classList.add('grey');
-
-            tr.appendChild(td);
+            calendarBody.appendChild(tr);
         }
 
-        calendarBody.appendChild(tr);
-        calendarClone.querySelector('h2').innerText = 'Test Month 2';
         
+        calendarClone.querySelector('h2').innerText = date.format('MMMM');
+
         document.getElementById('app').appendChild(calendarClone);
     }
 }

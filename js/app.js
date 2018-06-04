@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const days = document.getElementById('days').value;
         const locale = document.getElementById('locale').value;
 
-        const calendar = new Calendar(date, days, locale);
+        const calendar = new Calendar(moment(date), Number.parseInt(days), locale);
         calendar.init();
     }
 })
