@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Calendar Demo</title>
+
+        <link rel="stylesheet" type="text/css" href="app.css">
+
+        <script src="js/calendar.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <div class="form">
+                <p>Select a Date</p>
+                <input id="datePicker" type="date">
+
+                <p>Number of Days</p>
+                <input id="days" type="number">
+
+                <p>Country Code</p>
+                <input id="locale" type="text">
+
+                <input id="submit" type="button" value="Submit">
+            </div>
+        </div>
+
+        <template id="calendar">
+            <h2 class="calendarTitle"></h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>S</th>
+                        <th>M</th>
+                        <th>T</th>
+                        <th>W</th>
+                        <th>T</th>
+                        <th>F</th>
+                        <th>S</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </template>
+    </body>
+</html>
