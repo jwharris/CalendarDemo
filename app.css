@@ -1,0 +1,44 @@
+#app {
+    display: flex;
+    flex-direction: column;
+    width: 934px;
+    margin: auto;
+}
+
+#app h2 {
+    margin: 1rem auto;
+}
+
+.form p {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.form input {
+    display: block;
+    margin: 1rem 0;
+}
+
+table {
+    margin: 1rem 0;
+    table-layout: fixed;
+    width: inherit;
+}
+
+table tbody td {
+    height: 60;
+    font-size: 2rem;
+    text-align: center;
+}
+
+table tbody td.grey {
+    background: #aaa;
+}
+
+table tbody td.green {
+    background: green;
+}
+
+table tbody td.yellow {
+    background: yellow;
+}
