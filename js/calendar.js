@@ -10,13 +10,14 @@ class Calendar {
 
         const calendarTemplate = document.getElementById('calendar').content;
         const calendarClone = document.importNode(calendarTemplate, true);
-
         const calendarBody = calendarClone.querySelector('tbody');
+        const numberOfWeeks = 1 + this.date.diff(this.days, 'weeks');
+
         let count = this.days,
             date = this.date;
         
 
-        for(let i = 0; i < Math.ceil(days/7); i++) {
+        for(let i = 0; i < numberOfWeeks; i++) {
 
             let tr = document.createElement('tr');
 
@@ -32,9 +33,12 @@ class Calendar {
                     }
                     else {
                         td.classList.add('green');
-                    }   
+                    }  
+                    
+                    count--;
+                    date = date.add(1, 'day');
                 }
-                if(count > 0) {
+                if(count > 0 && count < this.days) {
                     if(date.day() === 0 || date.day() === 6)
                     {
                         td.classList.add('yellow');
@@ -42,6 +46,9 @@ class Calendar {
                     else {
                         td.classList.add('green');
                     }
+
+                    count--;
+                    date = date.add(1, 'day');
                 }
                 else {
                     td.classList.add('grey');
@@ -49,8 +56,7 @@ class Calendar {
 
                 tr.appendChild(td);
 
-                count--;
-                date = date.add(1, 'day');
+                
             }
             
             calendarBody.appendChild(tr);
