@@ -1,11 +1,18 @@
 #app {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     width: 934px;
     margin: auto;
 }
 
-#app h2 {
+#calendarContainer {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    margin: auto;
+}
+
+#calendarContainer h2 {
     margin: 1rem auto;
 }
 
@@ -16,7 +23,7 @@
 
 .form input {
     display: block;
-    margin: 1rem 0;
+    margin-bottom: 1rem ;
 }
 
 table {

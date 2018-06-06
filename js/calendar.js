@@ -28,7 +28,7 @@ class Calendar {
 
                 let td = document.createElement('td');
 
-                if(count === dayDiff && date.day() === j) {
+                if (count === dayDiff && date.day() === j) {
 
                     if(date.day() === 0 || date.day() === 6)
                     {
@@ -36,12 +36,14 @@ class Calendar {
                     }
                     else {
                         td.classList.add('green');
-                    }  
+                    }
+
+                    td.innerText = date.format('D');
                     
                     count--;
                     date = date.add(1, 'day');
                 }
-                if(count > 0 && count < dayDiff) {
+                else if (count >= 0 && count < dayDiff) {
                     if(date.day() === 0 || date.day() === 6)
                     {
                         td.classList.add('yellow');
@@ -49,6 +51,8 @@ class Calendar {
                     else {
                         td.classList.add('green');
                     }
+
+                    td.innerText = date.format('D');
 
                     count--;
                     date = date.add(1, 'day');
@@ -63,7 +67,7 @@ class Calendar {
             calendarBody.appendChild(tr);
         }
         
-        document.getElementById('app').appendChild(calendarClone);
+        document.getElementById('calendarContainer').appendChild(calendarClone);
     }
 
     init() {
