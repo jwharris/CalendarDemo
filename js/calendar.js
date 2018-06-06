@@ -6,18 +6,20 @@ class Calendar {
         this.locale = locale;
     }
 
-    _createMonth() {
+    _createMonth(startDate, endDate) {
+
         const calendarTemplate = document.getElementById('calendar').content;
         const calendarClone = document.importNode(calendarTemplate, true);
         const calendarBody = calendarClone.querySelector('tbody');
 
-        const endDate = this.date.clone().add(this.days, 'days');
-        const numberOfWeeks = 1 + endDate.diff(this.date, 'weeks');
+        const numberOfWeeks = 1 + endDate.diff(startDate, 'weeks');
+        const dayDiff = endDate.diff(startDate, 'days');
 
-        let count = this.days,
-            date = this.date;
+        let count = endDate.diff(startDate, 'days'),
+            date = startDate.clone();
+
+        calendarClone.querySelector('h2').innerText = date.format('MMMM YYYY');
         
-
         for(let i = 0; i < numberOfWeeks; i++) {
 
             let tr = document.createElement('tr');
@@ -26,7 +28,7 @@ class Calendar {
 
                 let td = document.createElement('td');
 
-                if(count === this.days && date.day() === j) {
+                if(count === dayDiff && date.day() === j) {
 
                     if(date.day() === 0 || date.day() === 6)
                     {
@@ -39,7 +41,7 @@ class Calendar {
                     count--;
                     date = date.add(1, 'day');
                 }
-                if(count > 0 && count < this.days) {
+                if(count > 0 && count < dayDiff) {
                     if(date.day() === 0 || date.day() === 6)
                     {
                         td.classList.add('yellow');
@@ -55,17 +57,12 @@ class Calendar {
                     td.classList.add('grey');
                 }
 
-                tr.appendChild(td);
-
-                
+                tr.appendChild(td);  
             }
             
             calendarBody.appendChild(tr);
         }
-
         
-        calendarClone.querySelector('h2').innerText = date.format('MMMM');
-
         document.getElementById('app').appendChild(calendarClone);
     }
 
@@ -73,10 +70,35 @@ class Calendar {
         
         const startDate = moment(this.date).clone();
         const endDate = moment(this.date).clone().add(this.days, 'days');
-        const range = moment(startDate).twix(endDate);
+        const monthArray = moment(startDate).twix(endDate).toArray('month');
 
-        const monthArray = range.toArray('month');
+        for(let i = 0; i < monthArray.length; i++) {
 
-        console.log(monthArray);
+            console.log(startDate.format());
+
+            if (monthArray[i].twix(monthArray[i].clone().endOf('month')).contains(startDate) && monthArray[i].twix(monthArray[i].clone().endOf('month')).contains(endDate)) {
+                console.log('Contained Month');
+
+                this._createMonth(startDate.clone(), endDate.clone());
+            }
+            else if (monthArray[i].twix(monthArray[i].clone().endOf('month')).contains(startDate)) {
+
+                console.log('Start Month');
+
+                this._createMonth(startDate.clone(), monthArray[i].clone().endOf('month'));
+            }
+            else if (monthArray[i].twix(monthArray[i].clone().endOf('month')).contains(endDate)) {
+
+                console.log('End Month');
+
+                this._createMonth(monthArray[i].clone().startOf('month'), endDate);
+            }
+            else {
+
+                console.log('Full Month');
+
+                this._createMonth(monthArray[i].clone().startOf('month'), monthArray[i].clone().endOf('month'));
+            }
+        }
     }
 }
