@@ -6,8 +6,7 @@ class Calendar {
         this.locale = locale;
     }
 
-    init() {
-
+    _createMonth() {
         const calendarTemplate = document.getElementById('calendar').content;
         const calendarClone = document.importNode(calendarTemplate, true);
         const calendarBody = calendarClone.querySelector('tbody');
@@ -68,5 +67,16 @@ class Calendar {
         calendarClone.querySelector('h2').innerText = date.format('MMMM');
 
         document.getElementById('app').appendChild(calendarClone);
+    }
+
+    init() {
+        
+        const startDate = moment(this.date).clone();
+        const endDate = moment(this.date).clone().add(this.days, 'days');
+        const range = moment(startDate).twix(endDate);
+
+        const monthArray = range.toArray('month');
+
+        console.log(monthArray);
     }
 }

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('submit').onclick = () => {
+    document.getElementById('submit').addEventListener('click', () => {
         
         const date = document.getElementById('datePicker').value;
         const days = document.getElementById('days').value;
@@ -7,5 +7,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const calendar = new Calendar(moment(date), Number.parseInt(days), locale);
         calendar.init();
-    }
+    });
 })
