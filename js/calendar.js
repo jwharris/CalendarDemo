@@ -11,7 +11,9 @@ class Calendar {
         const calendarTemplate = document.getElementById('calendar').content;
         const calendarClone = document.importNode(calendarTemplate, true);
         const calendarBody = calendarClone.querySelector('tbody');
-        const numberOfWeeks = 1 + this.date.diff(this.days, 'weeks');
+
+        const endDate = this.date.clone().add(this.days, 'days');
+        const numberOfWeeks = 1 + endDate.diff(this.date, 'weeks');
 
         let count = this.days,
             date = this.date;
